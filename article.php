@@ -37,10 +37,14 @@ if($article == null)
 $article->content = mixkeyword($article->content);
 
 $tempinfo->assign("article",$article);
-
-$categorylist = $categorydata->GetCategoryList(null,'article',0,'');
+$categorylist = $categorydata->GetCategoryList(null,'article',$article->cid,'');
 $category = $categorydata->GetCategory($article->cid);
 $tempinfo->assign("category",$category);
+
+$cdata = $categorydata->GetCategory($article->cid);
+$sublist = $categorydata->GetSubCategory($cdata->pid);
+
+$tempinfo->assign("subcatelist",$sublist);
 if($parents = $categorydata->GetParentCategory($article->cid,$categorylist)){
 	$parents = array_reverse($parents);
 	foreach($parents as $key => $val){

@@ -104,4 +104,22 @@ function siteurl()
 	}
 	return $scheme . '://' . $clean_url;
 }
+
+function getRoute()
+{
+	if(substr($_SERVER['REQUEST_URI'], -1) == '/') {
+		$_SERVER['REQUEST_URI'] = substr($_SERVER['REQUEST_URI'], 0,-1);
+	}
+	return 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+}
+
+
+function p($str) {
+	echo "<pre>";
+	if(is_bool($str)){
+		var_dump($str);
+	}else{
+		print_r($str);
+	}
+}
 ?>

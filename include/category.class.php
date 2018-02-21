@@ -94,6 +94,29 @@ class Category
 	        return 1;
 	    }
     }
+
+    function ExistSubCategory($pid=0)
+    {
+  		if($pid <= 0) return 0;
+        global $yiqi_db;
+	    $sql = "select type from yiqi_category where pid = '$pid' limit 1";	    
+	    $exist = $yiqi_db->get_row(CheckSql($sql));
+	    if(!$exist)
+	    {
+	        return 0;
+	    }
+	    else
+	    {
+	        return $exist->type;
+	    }
+    }
+
+
+
+    function ExistChildCategory($subcid, $cid){
+    	$cids = $this->GetSubCategoryIDs($cid);
+    	return in_array($subcid, $cids) ? 1 : 0;
+    }
     
     function ExistFilename($filename)
 	{

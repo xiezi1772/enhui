@@ -15,6 +15,8 @@ if($action=='save')
     $producttemplets = $_POST['producttemplets'];
     $productfilename = $_POST['productfilename'];
 	$productadddate = $_POST['productadddate'];
+	$protype = $_POST['protype'];
+
     $productthumb = "-";
     if(empty($productname))
     {
@@ -64,8 +66,8 @@ if($action=='save')
 		$productadddate = $nowdate;
 	}
 	
-	$sql = "INSERT INTO yiqi_product (pid ,name ,cid ,seotitle ,seokeywords ,seodescription,content ,adddate ,lasteditdate,filename ,templets,status)" .
-		   "VALUES (NULL, '$productname', '$productcategory','$productseotitle', '$productkeywords', '$productdescription', '$productcontent', '$productadddate', '$nowdate','$productfilename', '$producttemplets', 'ok')";
+	$sql = "INSERT INTO yiqi_product (pid ,name ,cid ,seotitle ,seokeywords ,seodescription,content ,adddate ,lasteditdate,filename ,templets,status,protype)" .
+		   "VALUES (NULL, '$productname', '$productcategory','$productseotitle', '$productkeywords', '$productdescription', '$productcontent', '$productadddate', '$nowdate','$productfilename', '$producttemplets', 'ok', '$protype')";
 	$result = $yiqi_db->query(CheckSql($sql));
 	if($result == 1)
 	{
@@ -131,14 +133,27 @@ if($action=='save')
 <?php
 $adminpagetitle = "添加产品";
 include("admin.header.php");?>
+<style>
+	.radio{
+		vertical-align: middle;
+	}
+</style>
 <link href="../images/cupertino/jquery-ui-1.8.4.custom.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="../images/jquery-ui-1.8.4.custom.min.js"></script>
 <script type="text/javascript" src="../images/jquery.ui.datepicker-zh-CN.js"></script>
 <script type="text/javascript" src="../images/jquery-ui-timepicker-addon-0.5.min.js"></script>
 <script type="text/javascript" src="../images/date.format.js"></script>
+
 <div class="main_body">
 <form id="sform" action="product-add.php" method="post" enctype="multipart/form-data">
 <table class="inputform" cellpadding="1" cellspacing="1">
+<tr>
+	<td class="label">类型</td>
+	<td class="input">
+	产品展示 <input type="radio" class="radio" name="protype" value="product" checked />&nbsp;&nbsp;
+	图片展示 <input type="radio" class="radio" name="protype" value="images" />
+	</td>
+</tr>
 <tr><td class="label">产品名称</td><td class="input"><input type="text" class="txt" name="productname" /></td></tr>
 <tr><td class="label">所属分类</td><td class="input"><select name="productcategory">
 <option value="0">请选择</option><?php
@@ -149,9 +164,9 @@ foreach($categorylist as $category)
 	echo "<option value=\"".$category->cid."\">".$category->name."</option>";
 }
 ?></select></td></tr>
-<tr><td class="label">SEO标题</td><td class="input"><input type="text" class="txt" name="productseotitle" /></td></tr>
-<tr><td class="label">SEO关键词</td><td class="input"><input type="text" class="txt" name="productkeywords" /></td></tr>
-<tr><td class="label">SEO描述</td><td class="input"><textarea class="txt" name="productdescription" style="width:200px;height:110px;"></textarea></td></tr>
+<tr class="status"><td class="label">SEO标题</td><td class="input"><input type="text" class="txt" name="productseotitle" /></td></tr>
+<tr class="status"><td class="label">SEO关键词</td><td class="input"><input type="text" class="txt" name="productkeywords" /></td></tr>
+<tr class="status"><td class="label">SEO描述</td><td class="input"><textarea class="txt" name="productdescription" style="width:200px;height:110px;"></textarea></td></tr>
 <tr><td class="label">缩略图</td>
 <td class="input">
 			<input type="hidden" id="formhash" name="formcode" value="<?php echo md5(microtime(true)); ?>">
@@ -161,21 +176,31 @@ foreach($categorylist as $category)
             </div>
 </td></tr>
 <tr><td class="label">发布时间</td><td class="input"><input id="pubdate" type="text" class="txt" name="productadddate" value="<?php echo date("Y-m-d H:i:s"); ?>"  />&nbsp;&nbsp;定时发布产品，该时间为北京时间。</td></tr>
-<tr><td class="label">自定义文件名</td><td class="input"><input type="text" class="txt" name="productfilename" />&nbsp;&nbsp;设置为http://开头，将链接到指定的地址。</td></tr>
-<tr><td class="label">默认模板</td><td class="input"><input type="text" class="txt" name="producttemplets" value="{style}/product.tpl" /></td></tr>
-<tr><td class="label">产品介绍</td><td class="input">
+<tr class="status"><td class="label">自定义文件名</td><td class="input"><input type="text" class="txt" name="productfilename" />&nbsp;&nbsp;设置为http://开头，将链接到指定的地址。</td></tr>
+<tr class="status"><td class="label">默认模板</td><td class="input"><input type="text" class="txt" name="producttemplets" value="{style}/pages.tpl" /></td></tr>
+<tr class="status"><td class="label">产品介绍</td><td class="input">
 <textarea id="contentform" rows="1" cols="1" style="width:580px;height:360px;" name="productcontent"></textarea>
 <!-- umeditor -->
-	<link href="umeditor/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">
-	<script type="text/javascript" charset="utf-8" src="umeditor/umeditor.config.js"></script>
-    <script type="text/javascript" charset="utf-8" src="umeditor/umeditor.min.js"></script>
-    <script type="text/javascript" src="umeditor/lang/zh-cn/zh-cn.js"></script>
+	<link href="bumeditor/themes/default/css/ueditor.css" type="text/css" rel="stylesheet">
+	<script type="text/javascript" charset="utf-8" src="bumeditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="bumeditor/ueditor.all.min.js"></script>
+    <script type="text/javascript" src="bumeditor/lang/zh-cn/zh-cn.js"></script>
 
 <script type="text/javascript">
 	$().ready(function() {
+		// 添加类型
+		$('input[name="protype"]').click(function(){
+			if($(this).val() == 'images') {
+				$('.status').hide();
+			} else {
+				$('.status').show();
+			}
+		})
+
+
 		//加载编辑器
-		UM.getEditor('contentform');
-		
+		// UM.getEditor('contentform');
+		UE.getEditor('contentform');
 		var formoptions = {
 			beforeSubmit: function() {
 				$("#submitbtn").val("正在处理...");
@@ -221,9 +246,10 @@ foreach($categorylist as $category)
 			$("#exttable").append('<tr id="exttd'+extnum+'"><td class="label">附加属性'+extnum+'</td><td class="input"><input type="hidden" name="chk[]" value="'+extnum+'" />名称：<input type="text" class="txt" name="extname['+extnum+']" />&nbsp;&nbsp;值：<input type="text" class="txt" name="extvalue['+extnum+']" /> <a href="javascript:void(0);" onclick="$(this).parent().parent().remove();">删除</a></td></tr>');
 			extnum++;
 		});
+
 	});
 </script>
-<tr><td class="label"><a id="extattrlink" href="javascript:void(0);">显示附加属性</a></td><td class="input"><a href="javascript:void(0);" id="addext" class="fr">增加一个附加属性</a></td></tr>
+<tr class="status"><td class="label"><a id="extattrlink" href="javascript:void(0);">显示附加属性</a></td><td class="input"><a href="javascript:void(0);" id="addext" class="fr">增加一个附加属性</a></td></tr>
 </table>
 <div id="extattr">
 <table id="exttable" class="inputform" cellpadding="1" cellspacing="1" style="margin-top:10px;">

@@ -33,6 +33,9 @@ if(count($settinglist)>0)
         $tempinfo->assign($settinginfo->varname,$settinginfo->value);
     }
 }
+// 当前页面路由
+$tempinfo->assign('route',getRoute());
+
 
 $categorydata = new Category;
 $categorylist = $categorydata->GetSubCategory(0,"product");
@@ -50,6 +53,7 @@ $cachedata = new Cache;
 $metadata = new Meta;
 $keyworddata = new Keywords;
 $attachdata = new Attach;
+
 $tempinfo->assign_by_ref("articledata",$articledata);
 $tempinfo->assign_by_ref("productdata",$productdata);
 $tempinfo->assign_by_ref("categorydata",$categorydata);

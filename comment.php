@@ -3,6 +3,7 @@ require_once 'include/common.inc.php';
 
 session_start();
 $action = $_POST["action"];
+
 if($action == "save")
 {
     $msgtitle = $_POST["msgtitle"];
@@ -21,6 +22,7 @@ if($action == "save")
         ShowMsg("请输入正确的标题");
         exit();
     }
+
     if(!preg_match("/^.{1,10}$/",$msgname))
     {
         ShowMsg("请输入您的姓名");

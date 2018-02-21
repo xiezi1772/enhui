@@ -39,6 +39,7 @@ if($action=='save')
     $productthumb = $_POST["productthumb"];
     $productfilename = $_POST["productfilename"];
 	$productadddate = $_POST["productadddate"];
+	$protype = $_POST['protype'];
     if(empty($productname))
     {
         $productname = $product->name;
@@ -105,7 +106,7 @@ if($action=='save')
 	if($attach){
 		$productthumb = $attach->file_location;
 	}
-	$sql = "UPDATE yiqi_product SET name='$productname' ,cid='$productcategory' ,thumb='$productthumb' ,seotitle='$productseotitle',seokeywords='$productkeywords' ,seodescription='$productdescription',content='$productcontent' ,adddate = '$productadddate' ,lasteditdate='$nowdate' ,filename='$productfilename',templets='$producttemplets' WHERE pid ='$pid' limit 1 ";
+	$sql = "UPDATE yiqi_product SET name='$productname' ,cid='$productcategory' ,thumb='$productthumb' ,seotitle='$productseotitle',seokeywords='$productkeywords' ,seodescription='$productdescription',content='$productcontent' ,adddate = '$productadddate' ,lasteditdate='$nowdate' ,filename='$productfilename',templets='$producttemplets',protype='$protype' WHERE pid ='$pid' limit 1 ";
 	$result = $yiqi_db->query(CheckSql($sql));
 	if($result == 1)
 	{
@@ -169,6 +170,11 @@ if($action=='save')
 <?php
 $adminpagetitle = "编辑产品";
 include("admin.header.php");?>
+<style>
+	.radio{
+		vertical-align: middle;
+	}
+</style>
 <link href="../images/cupertino/jquery-ui-1.8.4.custom.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="../images/jquery-ui-1.8.4.custom.min.js"></script>
 <script type="text/javascript" src="../images/jquery.ui.datepicker-zh-CN.js"></script>
@@ -177,6 +183,13 @@ include("admin.header.php");?>
 <div class="main_body">
 <form id="sform" action="" method="post" enctype="multipart/form-data">
 <table class="inputform" cellpadding="1" cellspacing="1">
+<tr>
+	<td class="label">类型</td>
+	<td class="input">
+	产品展示 <input type="radio" class="radio" name="protype" value="product" <?php if($product->protype == 'product') echo 'checked';?> />&nbsp;&nbsp;
+	图片展示 <input type="radio" class="radio" name="protype" value="images" <?php if($product->protype == 'images') echo 'checked';?> />
+	</td>
+</tr>
 <tr><td class="label">产品名称</td><td class="input"><input type="text" class="txt" name="productname" value="<?php echo $product->name;?>"/></td></tr>
 <tr><td class="label">所属分类</td><td class="input"><select name="productcategory"><?php
 $categorydata = new Category;
@@ -193,9 +206,9 @@ foreach($categorylist as $category)
     }
 }
 ?></select></td></tr>
-<tr><td class="label">SEO标题</td><td class="input"><input type="text" class="txt" name="productseotitle" value="<?php echo $product->seotitle;?>" /></td></tr>
-<tr><td class="label">SEO关键词</td><td class="input"><input type="text" class="txt" name="productkeywords" value="<?php echo $product->seokeywords;?>" /></td></tr>
-<tr><td class="label">SEO描述</td><td class="input"><textarea class="txt" name="productdescription" style="width:200px;height:110px;"><?php echo $product->seodescription;?></textarea></td></tr>
+<tr class="status"><td class="label">SEO标题</td><td class="input"><input type="text" class="txt" name="productseotitle" value="<?php echo $product->seotitle;?>" /></td></tr>
+<tr class="status"><td class="label">SEO关键词</td><td class="input"><input type="text" class="txt" name="productkeywords" value="<?php echo $product->seokeywords;?>" /></td></tr>
+<tr class="status"><td class="label">SEO描述</td><td class="input"><textarea class="txt" name="productdescription" style="width:200px;height:110px;"><?php echo $product->seodescription;?></textarea></td></tr>
 <tr><td class="label">缩略图</td>
 <td class="input">
 			<input type="hidden" id="formhash" name="formcode" value="<?php echo md5(microtime(true)); ?>">
@@ -209,21 +222,31 @@ foreach($categorylist as $category)
             </div>
 </td></tr>
 <tr><td class="label">发布时间</td><td class="input"><input id="pubdate" type="text" class="txt" name="productadddate" value="<?php echo $product->adddate;?>" />&nbsp;&nbsp;定时发布产品，该时间为北京时间。</td></tr>
-<tr><td class="label">自定义文件名</td><td class="input"><input type="text" class="txt" name="productfilename" value="<?php echo $product->filename;?>" />&nbsp;&nbsp;设置为http://开头，将链接到指定的地址。</td></tr>
-<tr><td class="label">默认模板</td><td class="input"><input type="text" class="txt" name="producttemplets" value="{style}/<?php echo $product->templets;?>" /></td></tr>
-<tr><td class="label">产品介绍</td><td class="input">
+<tr class="status"><td class="label">自定义文件名</td><td class="input"><input type="text" class="txt" name="productfilename" value="<?php echo $product->filename;?>" />&nbsp;&nbsp;设置为http://开头，将链接到指定的地址。</td></tr>
+<tr class="status"><td class="label">默认模板</td><td class="input"><input type="text" class="txt" name="producttemplets" value="{style}/<?php echo $product->templets;?>" /></td></tr>
+<tr class="status"><td class="label">产品介绍</td><td class="input">
 <textarea id="contentform" rows="1" cols="1" style="width:580px;height:360px;" name="productcontent"><?php echo $product->content;?></textarea>
 <!-- umeditor -->
-	<link href="umeditor/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">
-	<script type="text/javascript" charset="utf-8" src="umeditor/umeditor.config.js"></script>
-    <script type="text/javascript" charset="utf-8" src="umeditor/umeditor.min.js"></script>
-    <script type="text/javascript" src="umeditor/lang/zh-cn/zh-cn.js"></script>
+	<link href="bumeditor/themes/default/css/ueditor.css" type="text/css" rel="stylesheet">
+	<script type="text/javascript" charset="utf-8" src="bumeditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="bumeditor/ueditor.all.min.js"></script>
+    <script type="text/javascript" src="bumeditor/lang/zh-cn/zh-cn.js"></script>
 
 <script type="text/javascript">
 	$().ready(function() {
+		var protypeObj = $('input[name="protype"]');
+		// 添加类型
+		protypeObj.click(function(){
+			if($(this).val() == 'images') {
+				$('.status').hide();
+			} else {
+				$('.status').show();
+			}
+		})
+		protypeObj.click();
 		//加载编辑器
-		UM.getEditor('contentform');
-		
+		// UM.getEditor('contentform');
+		UE.getEditor('contentform');
 		var formoptions = {
 			beforeSubmit: function() {
 				$("#submitbtn").val("正在处理...");
@@ -262,7 +285,7 @@ foreach($categorylist as $category)
 	});
 </script>
 </td></tr>
-<tr><td class="label"><a id="extattrlink" href="javascript:void(0);">隐藏附加属性</a></td><td class="input"><a href="javascript:void(0);" id="addext" class="fr">增加一个附加属性</a></td></tr>
+<tr class="status"><td class="label"><a id="extattrlink" href="javascript:void(0);">隐藏附加属性</a></td><td class="input"><a href="javascript:void(0);" id="addext" class="fr">增加一个附加属性</a></td></tr>
 </table>
 <div id="extattr">
 <table id="exttable" class="inputform" cellpadding="1" cellspacing="1" style="margin-top:10px;">

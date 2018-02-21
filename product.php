@@ -36,11 +36,12 @@ if($product == null)
 
 
 $product->content = mixkeyword($product->content);
-
 $tempinfo->assign("product",$product);
-
 $categorylist = $categorydata->GetCategoryList(null,'product',0,'');
 $category = $categorydata->GetCategory($product->cid);
+$cdata = $categorydata->GetCategory($product->cid);
+$sublist = $categorydata->GetSubCategory($cdata->pid, $category->type);
+$tempinfo->assign("subcatelist",$sublist);
 $tempinfo->assign("category",$category);
 if($parents = $categorydata->GetParentCategory($product->cid,$categorylist)){
 	$parents = array_reverse($parents);

@@ -161,20 +161,20 @@ foreach($categorylist as $category)
 </td></tr>
 <tr><td class="label">发布时间</td><td class="input"><input id="pubdate" type="text" class="txt" name="articleadddate" value="<?php echo date("Y-m-d H:i:s"); ?>" />&nbsp;&nbsp;定时发布文章，该时间为北京时间。</td></tr>
 <tr><td class="label">自定义文件名</td><td class="input"><input type="text" class="txt" name="articlefilename" value="" />&nbsp;&nbsp;设置为http://开头，将链接到指定的地址。</td></tr>
-<tr><td class="label">默认模板</td><td class="input"><input type="text" class="txt" name="articletemplets" value="{style}/article.tpl" /></td></tr>
+<tr><td class="label">默认模板</td><td class="input"><input type="text" class="txt" name="articletemplets" value="{style}/pages.tpl" /></td></tr>
 <tr><td class="label">文章内容</td><td class="input">
 <textarea id="contentform" rows="1" cols="1" style="width:580px;height:360px;" name="articlecontent"></textarea>
 <!-- umeditor -->
-	<link href="umeditor/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">
-	<script type="text/javascript" charset="utf-8" src="umeditor/umeditor.config.js"></script>
-    <script type="text/javascript" charset="utf-8" src="umeditor/umeditor.min.js"></script>
-    <script type="text/javascript" src="umeditor/lang/zh-cn/zh-cn.js"></script>
+	<link href="bumeditor/themes/default/css/ueditor.css" type="text/css" rel="stylesheet">
+	<script type="text/javascript" charset="utf-8" src="bumeditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="bumeditor/ueditor.all.min.js"></script>
+    <script type="text/javascript" src="bumeditor/lang/zh-cn/zh-cn.js"></script>
 
 <script type="text/javascript">
     $(function(){
 		//加载编辑器
-		UM.getEditor('contentform');
-		
+		// UM.getEditor('contentform');
+		UE.getEditor('contentform');
 		//其他
 		var formoptions = {
 			beforeSubmit: function() {

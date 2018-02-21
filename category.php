@@ -81,6 +81,11 @@ if($_GET['q'] OR $_GET["name"]=='search'){
 		$skip = ($curpage - 1) * $take;
 		$totalpage = (int)($total % $take == 0 ? $total / $take : $total / $take + 1);
 		$productlist = $productdata->TakeProductList($category->cid,$skip,$take);
+		foreach ($productlist as $key => $pdata) {
+			$hname = mb_strlen($pdata->name) > 12 ? mb_substr($pdata->name,0, 12).'...' : $pdata->name;
+			$productlist[$key]->hname = $hname;
+		}
+
 		$tempinfo->assign("productlist",$productlist);
 	}
 	else
@@ -96,15 +101,17 @@ if($curpage > 1)
 }
 $tempinfo->assign("category",$category);
 $tempinfo->assign("subcategory",$categorydata->GetSubCategory($category->cid,$category->type));
-
+$tempinfo->assign("subcatelist",$categorydata->GetSubCategory($category->pid,$category->type));
 $tempinfo->assign("take",$take);
 $tempinfo->assign("total",$total);
 $tempinfo->assign("totalpage",$totalpage);
 $tempinfo->assign("curpage",$curpage);
+
 if($category->pid > 0){
 	$categorylist = $categorydata->GetCategoryList(null,$category->type,0,'');
 	$parents = $categorydata->GetParentCategory($category->pid,$categorylist);
 	$parents = array_reverse($parents);
+
 	foreach($parents as $key => $val){
 		$tempinfo->Crumb($val->name, 'category', $val->filename);
 	}

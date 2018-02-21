@@ -36,8 +36,8 @@ include("admin.header.php");?>
 <div class="clear">&nbsp;</div>
 <div class="indexblock" onclick="window.location.href='company-option.php'">
 <dl>
-<dt>公司简介</dt>
-<dd>设置网站首页公司简介信息</dd>
+<dt>关于我们</dt>
+<dd>这里设置的是网站首页关于我们的简介信息</dd>
 </dl> 
 </div>
 <div class="indexblock" onclick="window.location.href='comments.php'">
