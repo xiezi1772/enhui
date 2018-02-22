@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf8">
-<title>{$seotitle} - {$sitename}</title>
+<title>{if $seotitle}{$seotitle} - {$sitename}{else}{$sitename}{/if}</title>
 {if $seokeywords != "-" && $seokeywords != ""}
 <meta name="keywords" content="{$seokeywords}" />
 {/if}
@@ -16,6 +16,9 @@
 		</script>
 <![endif]-->
 <script type="text/javascript" language="javascript" src="{$siteurl}/templets/{$templets->directory}/js/common.js"></script>
+<script type="text/javascript" language="javascript" src="{$siteurl}/templets/{$templets->directory}/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" language="javascript" src="{$siteurl}/templets/{$templets->directory}/js/unslider.min.js"></script>
+
 <style type=text/css media=all>
 	@import url({$siteurl}/templets/{$templets->directory}/css/main.css);
 </style>
@@ -24,13 +27,13 @@
 <div id="main_div">
 	<div id="top_div">
 		<div id="logo"><img src="{$siteurl}/templets/{$templets->directory}/images/logo.gif"></div>
-		<div id="hotline"></div><div id="selectlanguage"><ul><li><span class="icon"></span><span class="txt"><a href="/cn/">中文</a></span></li><li><span class="icon"></span><span class="txt"><a href="/en/">English</a></span></li></ul></div>
+		<div id="hotline"></div><div id="selectlanguage"><ul><li><span class="icon"></span><span class="txt"><a href="language.php?l=cn">中文</a></span></li><li><span class="icon"></span><span class="txt"><a href="language.php?l=en">English</a></span></li></ul></div>
 	</div>
 	<!--menu-->
 	<div id="menu_div">
 	{assign var="topnavlist" value=$navdata->TakeNavigateList("顶部导航",0,7)}
   <ul>
-     <li class="first_node"><a href="{$siteurl}" {if $route eq $siteurl}class="current"{/if} >首&nbsp;页</a></li>
+     <li class="first_node"><a href="{$siteurl}" {if $route eq $siteurl}class="current"{/if} >{if $language eq 'en'}Home{else}首&nbsp;页{/if}</a></li>
      {foreach from=$topnavlist item=navinfo name=n1}
      {assign var="existcategory" value=$categorydata->ExistCategory($navinfo->catid)}
      {assign var="existsubcategory" value=$categorydata->ExistSubCategory($navinfo->catid)}
@@ -71,9 +74,21 @@
  	{/foreach}
   </div>
   <div id="banner_div">
-  	<script language=javascript>
-  		LoadFlash('transparent','{$siteurl}/templets/{$templets->directory}/images/banner.swf',982,292);
-  	</script>
+    {assign var=lunbo_list value=$lunbo|unserialize}
+    <ul>
+    {foreach from=$lunbo_list item=lunbo_info}
+    <li><a href="{if $lunbo_info->url}{$lunbo_info->url}{else}javascript:;{/if}"><img src="{$lunbo_info->image}"></a></li>
+    {/foreach}
+    </ul>
 </div>
+
+{literal}
+<script>
+  $('#banner_div').unslider({
+    dots: true,
+    fluid: true
+  });
+</script>
+{/literal}
 
 

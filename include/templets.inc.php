@@ -36,6 +36,7 @@ if(count($settinglist)>0)
 // 当前页面路由
 $tempinfo->assign('route',getRoute());
 
+$tempinfo->assign('language', $_COOKIE['language']=='en'?'en':'cn');
 
 $categorydata = new Category;
 $categorylist = $categorydata->GetSubCategory(0,"product");

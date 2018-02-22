@@ -16,7 +16,7 @@
 						<div id="article_p">
 		          <div id="title_info">{$product->name}</div>
 	              <div id="news_content">{$product->content}</div>
-                  <div id="news_date"><div id="newsDate_left">发布时间：{$product->adddate}</div><div id="newsDate_right"><a href="javascript:history.back(-1);">&lt; 返回 &gt;</a></div></div>
+                  <div id="news_date"><div id="newsDate_left">{if $language eq 'en'}add Time:{else}发布时间：{/if}{$product->adddate}</div><div id="newsDate_right"><a href="javascript:history.back(-1);">&lt; {if $language eq 'en'}Back{else}返回{/if} &gt;</a></div></div>
 		   </div>
 		</div>
 	</div>

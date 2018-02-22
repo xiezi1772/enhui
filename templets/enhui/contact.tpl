@@ -1,24 +1,28 @@
+{if $language eq 'en'}
+{assign var="seotitle" value="Contacts"}
+{else}
 {assign var="seotitle" value="联系我们"}
+{/if}
 {include file="header.tpl"}
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=EFb04d2aba04d21fec7e0324cba7f40e&services=&t=20180201111639"></script>
 <div id="location_div">
 	{foreach from=$crumb item=cat}
 	<a href="{$cat->url}">{$cat->name}</a>  &gt; 
 	{/foreach} 
-	联系我们
+	{if $language eq 'en'}Contacts{else}联系我们{/if}
 </div>
   <div id="middle_div_sub">
 		<div id="left_box_sub">
 		 	<ul id="category_sub_left">
-				<li><a class="on"  href="#">联系我们</a></li>
+				<li><a class="on"  href="#">{if $language eq 'en'}Contacts{else}联系我们{/if}</a></li>
 			</ul>
 		</div>
 		<div id="right_box_sub">
-			<div id="title_sub"><span class="icon_red_square"></span><span class="txt">联系我们</span></div>
+			<div id="title_sub"><span class="icon_red_square"></span><span class="txt">{if $language eq 'en'}Contacts{else}联系我们{/if}</span></div>
 			<div id="article_p"><P><IMG style="WIDTH: 184px; HEIGHT: 146px" align=right src="{$siteurl}/templets/{$templets->directory}/images/contacts.jpg" width=234 height=206><BR><FONT face=Verdana><FONT size=3><STRONG>{$companyname}</STRONG> <BR></FONT></FONT><FONT face=Verdana></FONT></P>
-<P><FONT face=Verdana>电 话：{$companyphone}</FONT></P>
-<P><FONT face=Verdana>传 真：{$companyfax}</FONT></P>
-<P><FONT face=Verdana>地 址： {$companyaddr} <BR>公司联系人： {$companycontact}<BR>邮 箱：{$companyemail}</FONT></P>
+<P><FONT face=Verdana>{if $language eq 'en'}Tel:{else}电 话：{/if}{$companyphone}</FONT></P>
+<P><FONT face=Verdana>{if $language eq 'en'}Fax:{else}传 真：{/if}{$companyfax}</FONT></P>
+<P><FONT face=Verdana>{if $language eq 'en'}Addr:{else}地 址：{/if} {$companyaddr} <BR>{if $language eq 'en'}Contacts:{else}公司联系人：{/if} {$companycontact}<BR>{if $language eq 'en'}Email:{else}邮 箱：{/if}{$companyemail}</FONT></P>
 <P>&nbsp;</P><DIV style="BORDER-BOTTOM: #ccc 1px solid; BORDER-LEFT: #ccc 1px solid; WIDTH: 100%; MARGIN-BOTTOM: 10px; HEIGHT: 450px; BORDER-TOP: #ccc 1px solid; BORDER-RIGHT: #ccc 1px solid" id=dituContent></DIV></div>
 		</div>
 	</div>

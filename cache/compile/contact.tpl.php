@@ -1,6 +1,10 @@
-<?php /* Smarty version 2.6.25, created on 2018-02-21 18:17:07
+<?php /* Smarty version 2.6.25, created on 2018-02-22 17:45:23
          compiled from contact.tpl */ ?>
+<?php if ($this->_tpl_vars['language'] == 'en'): ?>
+<?php $this->assign('seotitle', 'Contacts'); ?>
+<?php else: ?>
 <?php $this->assign('seotitle', "联系我们"); ?>
+<?php endif; ?>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "header.tpl", 'smarty_include_vars' => array()));
 $this->_tpl_vars = $_smarty_tpl_vars;
@@ -15,27 +19,27 @@ unset($_smarty_tpl_vars);
 "><?php echo $this->_tpl_vars['cat']->name; ?>
 </a>  &gt; 
 	<?php endforeach; endif; unset($_from); ?> 
-	联系我们
+	<?php if ($this->_tpl_vars['language'] == 'en'): ?>Contacts<?php else: ?>联系我们<?php endif; ?>
 </div>
   <div id="middle_div_sub">
 		<div id="left_box_sub">
 		 	<ul id="category_sub_left">
-				<li><a class="on"  href="#">联系我们</a></li>
+				<li><a class="on"  href="#"><?php if ($this->_tpl_vars['language'] == 'en'): ?>Contacts<?php else: ?>联系我们<?php endif; ?></a></li>
 			</ul>
 		</div>
 		<div id="right_box_sub">
-			<div id="title_sub"><span class="icon_red_square"></span><span class="txt">联系我们</span></div>
+			<div id="title_sub"><span class="icon_red_square"></span><span class="txt"><?php if ($this->_tpl_vars['language'] == 'en'): ?>Contacts<?php else: ?>联系我们<?php endif; ?></span></div>
 			<div id="article_p"><P><IMG style="WIDTH: 184px; HEIGHT: 146px" align=right src="<?php echo $this->_tpl_vars['siteurl']; ?>
 /templets/<?php echo $this->_tpl_vars['templets']->directory; ?>
 /images/contacts.jpg" width=234 height=206><BR><FONT face=Verdana><FONT size=3><STRONG><?php echo $this->_tpl_vars['companyname']; ?>
 </STRONG> <BR></FONT></FONT><FONT face=Verdana></FONT></P>
-<P><FONT face=Verdana>电 话：<?php echo $this->_tpl_vars['companyphone']; ?>
+<P><FONT face=Verdana><?php if ($this->_tpl_vars['language'] == 'en'): ?>Tel:<?php else: ?>电 话：<?php endif; ?><?php echo $this->_tpl_vars['companyphone']; ?>
 </FONT></P>
-<P><FONT face=Verdana>传 真：<?php echo $this->_tpl_vars['companyfax']; ?>
+<P><FONT face=Verdana><?php if ($this->_tpl_vars['language'] == 'en'): ?>Fax:<?php else: ?>传 真：<?php endif; ?><?php echo $this->_tpl_vars['companyfax']; ?>
 </FONT></P>
-<P><FONT face=Verdana>地 址： <?php echo $this->_tpl_vars['companyaddr']; ?>
- <BR>公司联系人： <?php echo $this->_tpl_vars['companycontact']; ?>
-<BR>邮 箱：<?php echo $this->_tpl_vars['companyemail']; ?>
+<P><FONT face=Verdana><?php if ($this->_tpl_vars['language'] == 'en'): ?>Addr:<?php else: ?>地 址：<?php endif; ?> <?php echo $this->_tpl_vars['companyaddr']; ?>
+ <BR><?php if ($this->_tpl_vars['language'] == 'en'): ?>Contacts:<?php else: ?>公司联系人：<?php endif; ?> <?php echo $this->_tpl_vars['companycontact']; ?>
+<BR><?php if ($this->_tpl_vars['language'] == 'en'): ?>Email:<?php else: ?>邮 箱：<?php endif; ?><?php echo $this->_tpl_vars['companyemail']; ?>
 </FONT></P>
 <P>&nbsp;</P><DIV style="BORDER-BOTTOM: #ccc 1px solid; BORDER-LEFT: #ccc 1px solid; WIDTH: 100%; MARGIN-BOTTOM: 10px; HEIGHT: 450px; BORDER-TOP: #ccc 1px solid; BORDER-RIGHT: #ccc 1px solid" id=dituContent></DIV></div>
 		</div>

@@ -1,3 +1,6 @@
+{assign var="seotitle" value=$category->seotitle}
+{assign var="seokeywords" value=$category->seokeywords}
+{assign var="seodescription" value=$category->seodescription}
 {include file="header.tpl"}
 {include file="require.tpl"}
   <div id="location_div">
@@ -26,7 +29,7 @@
 			</li>
 			{/foreach}
 			{else}
-			该分类下暂时没有内容
+			{if $language eq 'en'}No content{else}该分类下暂时没有内容{/if}
 			{/if}
 			</ul>
 			<div class="pager-links">

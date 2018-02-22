@@ -1,7 +1,10 @@
-<?php /* Smarty version 2.6.25, created on 2018-02-20 16:33:25
+<?php /* Smarty version 2.6.25, created on 2018-02-22 17:57:40
          compiled from productcategory.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('function', 'formaturl', 'productcategory.tpl', 21, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('function', 'formaturl', 'productcategory.tpl', 24, false),)), $this); ?>
+<?php $this->assign('seotitle', $this->_tpl_vars['category']->seotitle); ?>
+<?php $this->assign('seokeywords', $this->_tpl_vars['category']->seokeywords); ?>
+<?php $this->assign('seodescription', $this->_tpl_vars['category']->seodescription); ?>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "header.tpl", 'smarty_include_vars' => array()));
 $this->_tpl_vars = $_smarty_tpl_vars;
@@ -59,7 +62,7 @@ unset($_smarty_tpl_vars);
 			</li>
 			<?php endforeach; endif; unset($_from); ?>
 			<?php else: ?>
-			该分类下暂时没有内容
+			<?php if ($this->_tpl_vars['language'] == 'en'): ?>No content<?php else: ?>该分类下暂时没有内容<?php endif; ?>
 			<?php endif; ?>
 			</ul>
 			<div class="pager-links">

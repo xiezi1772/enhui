@@ -1,0 +1,12 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /web/enhui/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^a_(.+)\.html$ article.php?name=$1 [L]
+RewriteRule ^p_(.+)\.html$ product.php?name=$1 [L]
+RewriteRule ^c_([^/_]+)[/]?$ category.php?name=$1 [L]
+RewriteRule ^c_([^/]+)_([0-9]+)[/]?$ category.php?name=$1&p=$2 [L]
+RewriteRule ^comment.html$ comment.php [L]
+RewriteRule ^sitemap.xml$ sitemap.php [L]
+</IfModule>

@@ -1,14 +1,15 @@
-<?php /* Smarty version 2.6.25, created on 2018-02-21 16:45:00
+<?php /* Smarty version 2.6.25, created on 2018-02-22 17:47:50
          compiled from header.tpl */ ?>
 <?php require_once(SMARTY_CORE_DIR . 'core.load_plugins.php');
-smarty_core_load_plugins(array('plugins' => array(array('function', 'formaturl', 'header.tpl', 63, false),)), $this); ?>
+smarty_core_load_plugins(array('plugins' => array(array('function', 'formaturl', 'header.tpl', 66, false),array('modifier', 'unserialize', 'header.tpl', 77, false),)), $this); ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf8">
-<title><?php echo $this->_tpl_vars['seotitle']; ?>
+<title><?php if ($this->_tpl_vars['seotitle']): ?><?php echo $this->_tpl_vars['seotitle']; ?>
  - <?php echo $this->_tpl_vars['sitename']; ?>
-</title>
+<?php else: ?><?php echo $this->_tpl_vars['sitename']; ?>
+<?php endif; ?></title>
 <?php if ($this->_tpl_vars['seokeywords'] != "-" && $this->_tpl_vars['seokeywords'] != ""): ?>
 <meta name="keywords" content="<?php echo $this->_tpl_vars['seokeywords']; ?>
 " />
@@ -26,6 +27,13 @@ smarty_core_load_plugins(array('plugins' => array(array('function', 'formaturl',
 <script type="text/javascript" language="javascript" src="<?php echo $this->_tpl_vars['siteurl']; ?>
 /templets/<?php echo $this->_tpl_vars['templets']->directory; ?>
 /js/common.js"></script>
+<script type="text/javascript" language="javascript" src="<?php echo $this->_tpl_vars['siteurl']; ?>
+/templets/<?php echo $this->_tpl_vars['templets']->directory; ?>
+/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" language="javascript" src="<?php echo $this->_tpl_vars['siteurl']; ?>
+/templets/<?php echo $this->_tpl_vars['templets']->directory; ?>
+/js/unslider.min.js"></script>
+
 <style type=text/css media=all>
 	@import url(<?php echo $this->_tpl_vars['siteurl']; ?>
 /templets/<?php echo $this->_tpl_vars['templets']->directory; ?>
@@ -38,14 +46,14 @@ smarty_core_load_plugins(array('plugins' => array(array('function', 'formaturl',
 		<div id="logo"><img src="<?php echo $this->_tpl_vars['siteurl']; ?>
 /templets/<?php echo $this->_tpl_vars['templets']->directory; ?>
 /images/logo.gif"></div>
-		<div id="hotline"></div><div id="selectlanguage"><ul><li><span class="icon"></span><span class="txt"><a href="/cn/">中文</a></span></li><li><span class="icon"></span><span class="txt"><a href="/en/">English</a></span></li></ul></div>
+		<div id="hotline"></div><div id="selectlanguage"><ul><li><span class="icon"></span><span class="txt"><a href="language.php?l=cn">中文</a></span></li><li><span class="icon"></span><span class="txt"><a href="language.php?l=en">English</a></span></li></ul></div>
 	</div>
 	<!--menu-->
 	<div id="menu_div">
 	<?php $this->assign('topnavlist', $this->_tpl_vars['navdata']->TakeNavigateList("顶部导航",0,7)); ?>
   <ul>
      <li class="first_node"><a href="<?php echo $this->_tpl_vars['siteurl']; ?>
-" <?php if ($this->_tpl_vars['route'] == $this->_tpl_vars['siteurl']): ?>class="current"<?php endif; ?> >首&nbsp;页</a></li>
+" <?php if ($this->_tpl_vars['route'] == $this->_tpl_vars['siteurl']): ?>class="current"<?php endif; ?> ><?php if ($this->_tpl_vars['language'] == 'en'): ?>Home<?php else: ?>首&nbsp;页<?php endif; ?></a></li>
      <?php $_from = $this->_tpl_vars['topnavlist']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }$this->_foreach['n1'] = array('total' => count($_from), 'iteration' => 0);
 if ($this->_foreach['n1']['total'] > 0):
     foreach ($_from as $this->_tpl_vars['navinfo']):
@@ -109,11 +117,26 @@ if ($this->_foreach['n2']['total'] > 0):
  	<?php endforeach; endif; unset($_from); ?>
   </div>
   <div id="banner_div">
-  	<script language=javascript>
-  		LoadFlash('transparent','<?php echo $this->_tpl_vars['siteurl']; ?>
-/templets/<?php echo $this->_tpl_vars['templets']->directory; ?>
-/images/banner.swf',982,292);
-  	</script>
+    <?php $this->assign('lunbo_list', ((is_array($_tmp=$this->_tpl_vars['lunbo'])) ? $this->_run_mod_handler('unserialize', true, $_tmp) : unserialize($_tmp))); ?>
+    <ul>
+    <?php $_from = $this->_tpl_vars['lunbo_list']; if (!is_array($_from) && !is_object($_from)) { settype($_from, 'array'); }if (count($_from)):
+    foreach ($_from as $this->_tpl_vars['lunbo_info']):
+?>
+    <li><a href="<?php if ($this->_tpl_vars['lunbo_info']->url): ?><?php echo $this->_tpl_vars['lunbo_info']->url; ?>
+<?php else: ?>javascript:;<?php endif; ?>"><img src="<?php echo $this->_tpl_vars['lunbo_info']->image; ?>
+"></a></li>
+    <?php endforeach; endif; unset($_from); ?>
+    </ul>
 </div>
+
+<?php echo '
+<script>
+  $(\'#banner_div\').unslider({
+    dots: true,
+    fluid: true
+  });
+</script>
+'; ?>
+
 
 

@@ -1,4 +1,4 @@
-<?php /* Smarty version 2.6.25, created on 2018-02-16 18:45:35
+<?php /* Smarty version 2.6.25, created on 2018-02-22 15:49:56
          compiled from require.tpl */ ?>
 <script>
 	siteurl = "<?php echo $this->_tpl_vars['siteurl']; ?>

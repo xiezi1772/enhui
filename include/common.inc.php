@@ -12,7 +12,7 @@ require_once 'templets.inc.php';
 require_once 'version.php';
 if(phpversion() > '5.1.0')
     date_default_timezone_set('Asia/Shanghai');
-$tempinfo->Crumb('网站首页');
+$tempinfo->Crumb($_COOKIE['language']=='en'?'Home':'网站首页');
 function GetRootPath()
 {
 	$sRealPath = realpath('.');

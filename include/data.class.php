@@ -43,7 +43,8 @@ function CheckSql($sql)
 {
     global $yiqi_db;
     global $cfg_db_prefix;
-    $sql = str_replace("yiqi_",$cfg_db_prefix,$sql);
+    $prefix = $_COOKIE['language'] == 'en'?'en'.$cfg_db_prefix:$cfg_db_prefix;
+    $sql = str_replace("yiqi_",$prefix,$sql);
     return $sql;
 }
 ?>

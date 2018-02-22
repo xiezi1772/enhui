@@ -1,3 +1,6 @@
+{assign var="seotitle" value=$category->seotitle}
+{assign var="seokeywords" value=$category->seokeywords}
+{assign var="seodescription" value=$category->seodescription}
 {include file="header.tpl"}
   <div id="location_div">
   	{foreach from=$crumb item=cat}
@@ -19,7 +22,7 @@
 				</li>
 				{/foreach}
 			{else}
-				<li>该分类下暂时没有内容</li>
+				<li>{if $language eq 'en'}No content{else}该分类下暂时没有内容{/if}</li>
 			{/if}
    			 </ul>
    			 <div class="pager-links">

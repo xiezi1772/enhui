@@ -11,9 +11,17 @@
 </head>
 
 <body>
-
+<style>
+	.header{
+		text-align: center;
+		color:#fff;
+		font-size: 20px;
+		line-height: 100px;
+	}
+</style>
 <div class="wrap">
 <div class="header">
+	青岛恩惠机电后台管理 <?php echo $_COOKIE['language']=='en' ? '（英文版）' : '（中文版）' ?>
 </div>
 <div class="nav"><span class="fr"><img src="../images/user_icon.gif" alt="欢迎登陆" title="欢迎登陆" />&nbsp;欢迎登陆：<?php echo $adminuserinfo->username;?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="logout.php">退出登录</a></span>当前位置：后台管理 》 <?php echo $adminpagetitle;?></div>
 <div class="clear">&nbsp;</div>

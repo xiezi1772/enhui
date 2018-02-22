@@ -1,5 +1,8 @@
-<?php /* Smarty version 2.6.25, created on 2018-02-21 13:48:55
+<?php /* Smarty version 2.6.25, created on 2018-02-22 18:04:00
          compiled from article.tpl */ ?>
+<?php $this->assign('seotitle', $this->_tpl_vars['article']->seotitle); ?>
+<?php $this->assign('seokeywords', $this->_tpl_vars['article']->seokeywords); ?>
+<?php $this->assign('seodescription', $this->_tpl_vars['article']->seodescription); ?>
 <?php $_smarty_tpl_vars = $this->_tpl_vars;
 $this->_smarty_include(array('smarty_include_tpl_file' => "header.tpl", 'smarty_include_vars' => array()));
 $this->_tpl_vars = $_smarty_tpl_vars;
@@ -31,8 +34,8 @@ unset($_smarty_tpl_vars);
 </div>
 	              <div id="news_content"><?php echo $this->_tpl_vars['article']->content; ?>
 </div>
-                  <div id="news_date"><div id="newsDate_left">发布时间：<?php echo $this->_tpl_vars['article']->adddate; ?>
-</div><div id="newsDate_right"><a href="javascript:history.back(-1);">&lt; 返回 &gt;</a></div></div>
+                  <div id="news_date"><div id="newsDate_left"><?php if ($this->_tpl_vars['language'] == 'en'): ?>add Time:<?php else: ?>发布时间：<?php endif; ?><?php echo $this->_tpl_vars['article']->adddate; ?>
+</div><div id="newsDate_right"><a href="javascript:history.back(-1);">&lt; <?php if ($this->_tpl_vars['language'] == 'en'): ?>Back<?php else: ?>返回<?php endif; ?> &gt;</a></div></div>
 		   </div>
 		</div>
 	</div>
